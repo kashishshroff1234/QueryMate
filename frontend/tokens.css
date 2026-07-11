@@ -1,0 +1,173 @@
+/* QueryMate design tokens — retail ops console, now with a full signal
+   palette instead of single-accent monochrome. Dark slate base stays
+   (it suits a data console and keeps text/numbers legible), but each
+   metric family now gets its own hue so the dashboard reads at a glance
+   instead of "card, card, card, card-with-red-border". */
+
+:root {
+  /* Base */
+  --color-bg: #12141a;
+  --color-bg-elevated: #1a1d26;
+  --color-bg-elevated-2: #222633;
+  --color-border: #2e3340;
+  --color-border-strong: #3d4456;
+  --color-text: #f1eee4;
+  --color-text-muted: #a3a7b5;
+  --color-text-faint: #6b7080;
+
+  /* Primary accent — amber/copper, still the "brand" color for CTAs */
+  --color-accent: #e08a2c;
+  --color-accent-bright: #ffab4d;
+  --color-accent-dim: #6b4a22;
+  --color-accent-bg: rgba(224, 138, 44, 0.12);
+
+  /* Signal palette — one hue per metric family, used across KPI cards,
+     charts, and chips so each category is visually distinct and
+     recognizable wherever it reappears */
+  --color-revenue: #4fd1a5;        /* teal-green — money/growth */
+  --color-revenue-bright: #6ee6bd;
+  --color-revenue-bg: rgba(79, 209, 165, 0.12);
+
+  --color-orders: #5b9dff;         /* blue — volume/activity */
+  --color-orders-bright: #82b8ff;
+  --color-orders-bg: rgba(91, 157, 255, 0.12);
+
+  --color-returns: #c98bf0;        /* violet — quality/rate metric */
+  --color-returns-bright: #dba8f7;
+  --color-returns-bg: rgba(201, 139, 240, 0.12);
+
+  --color-anomaly: #f0556a;        /* red — reserved strictly for alerts */
+  --color-anomaly-bright: #ff7d8f;
+  --color-anomaly-bg: rgba(240, 85, 106, 0.13);
+  --color-anomaly-border: rgba(240, 85, 106, 0.4);
+
+  --color-success: #4fd1a5;
+
+  /* Chart series palette — for multi-series/categorical charts */
+  --chart-1: #e08a2c;
+  --chart-2: #4fd1a5;
+  --chart-3: #5b9dff;
+  --chart-4: #c98bf0;
+  --chart-5: #f0c75e;
+  --chart-6: #f0556a;
+
+  /* Type */
+  --font-display: "Space Grotesk", "Inter", sans-serif;
+  --font-body: "Inter", -apple-system, sans-serif;
+  --font-mono: "IBM Plex Mono", "SF Mono", Consolas, monospace;
+
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.8125rem;
+  --fs-base: 0.9375rem;
+  --fs-md: 1.0625rem;
+  --fs-lg: 1.375rem;
+  --fs-xl: 1.875rem;
+  --fs-xxl: 2.5rem;
+
+  /* Layout */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+
+  --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 8px 24px rgba(0, 0, 0, 0.32);
+  --transition-fast: 140ms ease;
+  --transition-base: 220ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-strong);
+  border-radius: 6px;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+a {
+  color: var(--color-accent-bright);
+  text-decoration: none;
+}
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent-bright);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Shared result-table styling — used by chatbot.js and dashboard.js
+   wherever a query result needs to render as a table. */
+table.result-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-sm);
+}
+table.result-table thead th {
+  position: sticky;
+  top: 0;
+  background: var(--color-bg-elevated-2);
+  text-align: left;
+  padding: var(--space-2) var(--space-3);
+  font-family: var(--font-mono);
+  font-weight: 500;
+  color: var(--color-text-muted);
+  border-bottom: 1px solid var(--color-border-strong);
+  white-space: nowrap;
+}
+table.result-table tbody td {
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+  white-space: nowrap;
+}
+table.result-table tbody tr:last-child td { border-bottom: none; }
